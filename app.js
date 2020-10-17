@@ -10,11 +10,15 @@ const {graphqlHTTP} =  require('express-graphql');
 // Databse
 const mongoose = require('mongoose');
 
+// middleware
+const isAuth = require('./middleware/is-auth')
 
 
 const app = express();
 app.use(bodyParser.json());
 
+// the middleware is going to run in every incoming request
+app.use(isAuth)
 
 app.use('/graphql',graphqlHTTP({
     schema:graphQLSchema ,
